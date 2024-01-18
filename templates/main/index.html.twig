@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!
+{% endblock %}
+
+{% block body %}
+
+	<div>
+		<a class="btn btn-primary" href="{{ path('app_sorteo_index') }}" role="button">Sorteos</a>
+		 {% if app.user %}
+            <a class="btn btn-warning text-white fw-bold" href="{{ path('app_user_edit', {'id': app.user.id}) }}" role="button">Añadir Fondos</a>
+        {% endif %}
+
+	</div>
+{% endblock %}
