@@ -47,17 +47,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->select('COUNT(a.id)')
             ->from(Apuesta::class, 'a')
             ->join('a.sorteo', 's')
+            ->join('a.numeroLoteria', 'nl')  // Agrega la relación con NumerosLoteria
             ->andWhere('a.user = :user')
             ->andWhere('s.state = 1')
-            ->andWhere('s.winner = a.numeroLoteria')
+            ->andWhere('s.winner = nl.id')  // Compara con el ID del número
             ->setParameter('user', $user);
-
+    
         $count = $queryBuilder->getQuery()->getSingleScalarResult();
         $query = $queryBuilder->getQuery();
-$sql = $query->getSQL();
-$params = $query->getParameters();
+//  $sql = $query->getSQL();
+//  $params = $query->getParameters();
 
-dd($sql, $params);
+//  dd($sql, $params);
         return $count > 0;
     }
 

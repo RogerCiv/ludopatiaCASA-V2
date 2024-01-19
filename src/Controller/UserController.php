@@ -88,19 +88,5 @@ class UserController extends AbstractController
 
 
 
-    /**
-     * Verifica si el usuario ha ganado algún sorteo.
-     */
-    private function checkUserWins(User $user): bool
-    {
-        // Itera sobre las apuestas del usuario
-        foreach ($user->getApuestas() as $apuesta) {
-            // Verifica si la apuesta es ganadora para el sorteo correspondiente
-            if ($apuesta->esGanadora()) {
-                return true; // El usuario ha ganado al menos un sorteo
-            }
-        }
 
-        return false; // El usuario no ha ganado ningún sorteo
-    }
 }

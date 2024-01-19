@@ -27,15 +27,16 @@
     </table>
 
 
-  {% if user.hasWonAnySorteo() %}
+  {% if hasWon %}
         <div class="alert alert-success">
             ¡Felicidades! Has ganado al menos un sorteo.
         </div>
     {% else %}
-        <div class="alert alert-info">
+        <div class="alert alert-danger">
             Aún no has ganado ningún sorteo.
         </div>
     {% endif %}
+
 
     <a href="{{ path('app_user_index') }}">back to list</a>
 
