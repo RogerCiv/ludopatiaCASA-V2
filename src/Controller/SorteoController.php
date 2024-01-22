@@ -148,19 +148,16 @@ class SorteoController extends AbstractController
     #[Route('/realizar_sorteo_manual/{id}', name: 'realizar_sorteo_manual', methods: ['GET'])]
 public function realizarSorteoManual(Sorteo $sorteo, EntityManagerInterface $entityManager): Response
 {
-    // Realiza el sorteo manualmente, similar a tu lógica actual
-    // Puedes copiar y pegar el código relevante de la acción realizarSorteo
+    // Realiza el sorteo manualmente
  // Realiza el sorteo
  $numerosLoteria = $sorteo->getNumerosLoteria();
- $numerosDisponibles = [];
- 
- foreach ($numerosLoteria as $numeroLoteria) {
-    
-         $numerosDisponibles[] = $numeroLoteria;
-     
- }
+//  $numerosDisponibles = [];
 
- $numeroGanador = $numerosDisponibles[array_rand($numerosDisponibles)]->getNumero();
+//  foreach ($numerosLoteria as $numeroLoteria) {  
+//          $numerosDisponibles[] = $numeroLoteria;
+//  }
+
+ $numeroGanador = $numerosLoteria[array_rand($numerosLoteria->toArray())]->getNumero();
  $sorteo->setWinner($numeroGanador);
     // Marca el sorteo como completado
     $sorteo->setState(1);

@@ -27,7 +27,7 @@
     </table>
 
 
-  {% if hasWon %}
+  {# {% if hasWon %}
         <div class="alert alert-success">
             ¡Felicidades! Has ganado al menos un sorteo.
         </div>
@@ -35,7 +35,18 @@
         <div class="alert alert-danger">
             Aún no has ganado ningún sorteo.
         </div>
+    {% endif %} #}
+ {% if hasWon %}
+        {% for apuesta in hasWon %}
+            <p>Sorteo: {{ apuesta.sorteo.name }}, Número Ganador: {{ apuesta.numeroLoteria.numero }}</p>
+            <p>Premio Ganado: {{ apuesta.sorteo.prize }} <a href="{{ path('app_user_cashwon', {'id': apuesta.user.id, 'prize': apuesta.sorteo.prize})}}" class="btn btn-warning">Cobrar</a></p>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-danger">
+            Aún no has ganado ningún sorteo.
+        </div>
     {% endif %}
+
 
 
     <a href="{{ path('app_user_index') }}">back to list</a>

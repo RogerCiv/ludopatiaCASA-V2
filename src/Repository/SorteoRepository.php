@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Sorteo;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Types\Types;
+
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -38,12 +40,35 @@ class SorteoRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    /**
+     * Encuentra sorteos donde la fecha_fin sea menor que la fecha actual y el state sea 0.
+     *
+     * @return Sorteo[] Devuelve un array de objetos Sorteo
+     */
+    public function findSorteosPasados(): array
+    {
+        $now = new \DateTime('now', new \DateTimeZone('Europe/Madrid'));
+        $query = $this->createQueryBuilder('s')
+            ->andWhere('s.fecha_fin < :now ')
+            ->andWhere('s.state = 0')
+            ->setParameter('now', $now)
+            // ->setParameter('state', 0)
+            ->getQuery();
+           
+
+            // dump([
+            //     'SQL' => $query->getSQL(),
+            //     'Parameters' => $query->getParameters(),
+            // ]);
+        
+            return $query->getResult();
+    }
 
 
     //    /**
     //     * @return Sorteo[] Returns an array of Sorteo objects
     //     */
-    //    public function findByExampleField($value): array
+    //    public function findByExampleField($value): arrayabout:blank#blocked
     //    {
     //        return $this->createQueryBuilder('s')
     //            ->andWhere('s.exampleField = :val')

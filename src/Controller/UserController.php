@@ -49,6 +49,8 @@ class UserController extends AbstractController
         // En tu controlador o servicio
 
         $hasWon = $userRepository->hasUserWonAnySorteo($user);
+        //  dd($hasWon);
+        
 
         return $this->render('user/show.html.twig', [
             'user' => $user,
@@ -86,6 +88,19 @@ class UserController extends AbstractController
     }
 
 
+
+  #[Route('/{id}/{prize}', name: 'app_user_cashwon', methods: ['POST','GET'])]
+    public function cashWon($prize, User $user, EntityManagerInterface $entityManager): Response
+    {
+       $fondos =$user->getFondos();
+       $newCash = $fondos + $prize;
+       $user->setFondos($newCash);
+       $entityManager->flush();
+   
+        return $this->redirectToRoute('app_user_show', ['id' => $user->getId()]);
+    }
+
+    
 
 
 
