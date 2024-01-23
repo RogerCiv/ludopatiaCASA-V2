@@ -41,7 +41,7 @@ class SorteoController extends AbstractController
             $costoNumeroLoteria = $sorteo->getCost();
 
             // Calcula el 50% del precio de cada número de lotería para este sorteo
-            $prize = 0.5 * $costoNumeroLoteria;
+            $prize = count($numLoterias) * $costoNumeroLoteria * 0.5;
 
             // Establece el Prize en el 50% del precio
             $sorteo->setPrize($prize);

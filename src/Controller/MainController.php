@@ -49,7 +49,7 @@ class MainController extends AbstractController
     //     $hasWonNotification = $userRepository->hasUserWonAnySorteoNotification($user);
 
     //     return $this->render('main/index.html.twig', [
-    //         'controller_name' => 'MainController',
+    //   
     //         'hasWonNotification' => $hasWonNotification,
     //     ]);
     // }

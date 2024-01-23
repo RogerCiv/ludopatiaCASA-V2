@@ -33,8 +33,8 @@ class SorteoRepository extends ServiceEntityRepository
         $now = new \DateTime();
 
         return $this->createQueryBuilder('s')
-            ->andWhere('s.Fecha <= :now') // Aquí ajusta a tu lógica específica
-            ->andWhere('s.fecha_fin >= :now') // Ajusta esto según tus necesidades
+            ->andWhere('s.Fecha <= :now') 
+            ->andWhere('s.fecha_fin >= :now') 
             ->setParameter('now', $now)
             ->getQuery()
             ->getOneOrNullResult();
