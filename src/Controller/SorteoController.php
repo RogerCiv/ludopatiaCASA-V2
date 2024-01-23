@@ -36,6 +36,7 @@ class SorteoController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $sorteo->setFechaInicio(new \DateTime());
             $sorteo->setState(0);
+            $sorteo->setCobrado(0);
             // Obtén el campo 'cost' del sorteo
             $costoNumeroLoteria = $sorteo->getCost();
 

@@ -5,26 +5,7 @@
 {% block body %}
     <h1>User</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-        </tbody>
-    </table>
+
 
 
   {# {% if hasWon %}
@@ -36,10 +17,13 @@
             Aún no has ganado ningún sorteo.
         </div>
     {% endif %} #}
- {% if hasWon %}
+{% if hasWon %}
         {% for apuesta in hasWon %}
             <p>Sorteo: {{ apuesta.sorteo.name }}, Número Ganador: {{ apuesta.numeroLoteria.numero }}</p>
-            <p>Premio Ganado: {{ apuesta.sorteo.prize }} <a href="{{ path('app_user_cashwon', {'id': apuesta.user.id, 'prize': apuesta.sorteo.prize})}}" class="btn btn-warning">Cobrar</a></p>
+            <p>Premio Ganado: {{ apuesta.sorteo.prize }}
+            {% if not apuesta.sorteo.getCobrado() %}          
+             <a href="{{ path('app_user_cashwon', {'id': apuesta.user.id, 'prize': apuesta.sorteo.prize, 'sorteoId': apuesta.sorteo.id })}}" class="btn btn-warning">Cobrar</a></p>
+            {% endif %}
         {% endfor %}
     {% else %}
         <div class="alert alert-danger">
@@ -48,7 +32,8 @@
     {% endif %}
 
 
-
+    <br>
+    <a href="/" class="btn btn-primary">Volver Main</a>
     <a href="{{ path('app_user_index') }}">back to list</a>
 
     <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>

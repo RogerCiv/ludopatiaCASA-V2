@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Apuesta;
 use App\Entity\NumerosLoteria;
 use App\Entity\Sorteo;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -32,6 +33,22 @@ class ApuestaRepository extends ServiceEntityRepository
             ->setParameter('sorteo', $sorteo)
             ->getQuery()
             ->getOneOrNullResult() !== null;
+    }
+     /**
+     * @param User $user
+     * @return Apuesta[] Returns an array of Apuesta objects
+     */
+    public function hasUserWonAnySorteo(User $user): array
+    {
+        return $this->createQueryBuilder('a')
+            ->join('a.sorteo', 's')
+            ->join('a.numeroLoteria', 'nl')
+            ->andWhere('a.user = :user')
+            ->andWhere('s.state = 1')
+            ->andWhere('s.winner = nl.numero')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
     }
 
 

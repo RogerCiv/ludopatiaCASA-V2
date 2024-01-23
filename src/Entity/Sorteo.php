@@ -43,6 +43,9 @@ class Sorteo
     #[ORM\ManyToMany(targetEntity: NumerosLoteria::class, inversedBy: 'sorteos')]
     private Collection $numerosLoteria;
 
+    #[ORM\Column]
+    private ?int $cobrado = null;
+
 
 
     public function __construct()
@@ -190,6 +193,18 @@ class Sorteo
     public function removeNumerosLoterium(NumerosLoteria $numerosLoterium): static
     {
         $this->numerosLoteria->removeElement($numerosLoterium);
+
+        return $this;
+    }
+
+    public function getCobrado(): ?int
+    {
+        return $this->cobrado;
+    }
+
+    public function setCobrado(int $cobrado): static
+    {
+        $this->cobrado = $cobrado;
 
         return $this;
     }

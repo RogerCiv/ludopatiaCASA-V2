@@ -5,11 +5,23 @@
 
 {% block body %}
 
-	<div>
-		<a class="btn btn-primary" href="{{ path('app_sorteo_index') }}" role="button">Sorteos</a>
-		 {% if app.user %}
-            <a class="btn btn-warning text-white fw-bold" href="{{ path('app_user_edit', {'id': app.user.id}) }}" role="button">Añadir Fondos</a>
-        {% endif %}
+	<div >
 
+	<h1 class="text-center">Bienvenidos a la Lotería </h1>
+	<div class="text-center mt-1">
+		<a class="btn btn-primary" href="{{ path('app_sorteo_index') }}" role="button">Sorteos</a>
+		{% if app.user %}
+			<a class="btn btn-warning text-white fw-bold" href="{{ path('app_user_edit', {'id': app.user.id}) }}" role="button">Añadir Fondos</a>
+			{# ir a perfil del usuario #}
+			<a class="btn btn-info text-white fw-bold" href="{{ path('app_user_show', {'id': app.user.id}) }}" role="button">Mi Perfil</a>
+		{% endif %}
+
+		{% if hasWonNotification %}
+			<div class="alert alert-info">
+				Tienes sorteos ganados por cobrar. ¡No olvides reclamar tus premios!
+				<a class="btn btn-info text-white fw-bold" href="{{ path('app_user_show', {'id': app.user.id}) }}" role="button">Ir a Perfil</a>
+			</div>
+		{% endif %}
+	</div>
 	</div>
 {% endblock %}

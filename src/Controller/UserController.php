@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Apuesta;
+use App\Entity\Sorteo;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -89,16 +91,19 @@ class UserController extends AbstractController
 
 
 
-  #[Route('/{id}/{prize}', name: 'app_user_cashwon', methods: ['POST','GET'])]
-    public function cashWon($prize, User $user, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/{prize}/{sorteoId}', name: 'app_user_cashwon', methods: ['POST','GET'])]
+    public function cashWon($prize,$sorteoId, User $user, EntityManagerInterface $entityManager): Response
     {
+       $sorteo = $entityManager->getRepository(Sorteo::class)->find($sorteoId);
        $fondos =$user->getFondos();
        $newCash = $fondos + $prize;
        $user->setFondos($newCash);
+       $sorteo->setCobrado(1);
        $entityManager->flush();
    
         return $this->redirectToRoute('app_user_show', ['id' => $user->getId()]);
     }
+
 
     
 

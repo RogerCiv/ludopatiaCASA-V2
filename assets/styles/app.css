@@ -1,3 +1,7 @@
 body {
-    background-color: skyblue;
+    background-color: rgb(136, 177, 197);
+}
+main{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px, 1fr));
 }

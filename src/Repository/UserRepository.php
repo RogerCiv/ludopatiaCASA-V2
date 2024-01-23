@@ -75,6 +75,25 @@ public function hasUserWonAnySorteo(User $user): array
 
     return $queryBuilder->getQuery()->getResult();
 }
+public function hasUserWonAnySorteoNotification(User $user): bool
+    {
+        $queryBuilder = $this->createQueryBuilder('u');
+        $queryBuilder
+            ->select('a')  // Selecciona la entidad Apuesta completa
+            ->from(Apuesta::class, 'a')
+            ->join('a.sorteo', 's')
+            ->join('a.numeroLoteria', 'nl')  // Agrega la relación con NumerosLoteria
+            ->andWhere('a.user = :user')
+            ->andWhere('s.state = 1')
+            ->andWhere('s.winner = nl.numero')  // Compara con el ID del número
+            ->andWhere('s.cobrado = false')  // Agrega la condición para verificar si el sorteo no ha sido cobrado
+            ->setParameter('user', $user);
+
+        $result = $queryBuilder->getQuery()->getResult();
+
+        // Devuelve true si hay sorteos ganados por cobrar, false en caso contrario
+        return !empty($result);
+    }
 
 //    /**
 //     * @return User[] Returns an array of User objects
