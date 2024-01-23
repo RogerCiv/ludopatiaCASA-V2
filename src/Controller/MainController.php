@@ -17,14 +17,18 @@ class MainController extends AbstractController
     public function index(UserRepository $userRepository,SorteoRepository $sorteoRepository, EntityManagerInterface $entityManager): Response
     {
         $this->realizarSorteo($sorteoRepository, $entityManager);
-        $user = $this->getUser();
-
-        $hasWonNotification = $userRepository->hasUserWonAnySorteoNotification($user);
-
-        return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
-            'hasWonNotification' => $hasWonNotification,
-        ]);
+        if($this->getUser()) {
+            
+            $user = $this->getUser();
+            
+            $hasWonNotification = $userRepository->hasUserWonAnySorteoNotification($user);
+            
+            return $this->render('main/index.html.twig', [
+                'controller_name' => 'MainController',
+                'hasWonNotification' => $hasWonNotification,
+            ]);
+        }
+        return $this->redirectToRoute('app_login');
     }
 
     public function realizarSorteo($sorteoRepository, $entityManager)
