@@ -40,26 +40,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
-//     public function hasUserWonAnySorteo(User $user): array
-//     {
-//         $queryBuilder = $this->createQueryBuilder('u');
-//         $queryBuilder
-//             ->select('COUNT(a.id)')
-//             ->from(Apuesta::class, 'a')
-//             ->join('a.sorteo', 's')
-//             ->join('a.numeroLoteria', 'nl')  // Agrega la relación con NumerosLoteria
-//             ->andWhere('a.user = :user')
-//             ->andWhere('s.state = 1')
-//             ->andWhere('s.winner = nl.numero')  // Compara con el ID del número
-//             ->setParameter('user', $user);
-    
-//         $count = $queryBuilder->getQuery()->getSingleScalarResult();
-//         $query = $queryBuilder->getQuery();
-// // Aún no has ganado ningún sorteo.
-//         // return $count > 0;
-//         // dump($queryBuilder->getQuery()->getResult());
-//         return $queryBuilder->getQuery()->getResult();
-//     }
+
 public function hasUserWonAnySorteo(User $user): array
 {
     $queryBuilder = $this->createQueryBuilder('u');
