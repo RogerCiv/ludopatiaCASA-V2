@@ -155,19 +155,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    // public function hasWonAnySorteo(): bool
-    // {
-    //     // Itera sobre las apuestas del usuario
-    //     foreach ($this->getApuestas() as $apuesta) {
-    //         // Verifica si la apuesta es ganadora para el sorteo correspondiente
-    //         if ($apuesta->esGanadora()) {
-    //             return true; // El usuario ha ganado al menos un sorteo
-    //         }
-    //     }
-
-    //     return false; // El usuario no ha ganado ningún sorteo
-    // }
     public function hasWonAnySorteo(): bool
 {
     // Itera sobre las apuestas del usuario

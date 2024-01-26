@@ -39,6 +39,11 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
     }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> a2ee63e22dfaff0bdef37e94d1e3985a9ee04497
 public function hasUserWonAnySorteo(User $user): array
 {
     $queryBuilder = $this->createQueryBuilder('u');
