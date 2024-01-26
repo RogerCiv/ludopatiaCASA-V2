@@ -46,15 +46,5 @@ class MainController extends AbstractController
 
         $entityManager->flush();
     }
-    // public function checkUnclaimedSorteo(UserRepository $userRepository)
-    // {
-    //     $user = $this->getUser();
 
-    //     $hasWonNotification = $userRepository->hasUserWonAnySorteoNotification($user);
-
-    //     return $this->render('main/index.html.twig', [
-    //   
-    //         'hasWonNotification' => $hasWonNotification,
-    //     ]);
-    // }
 }

@@ -48,12 +48,8 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user, UserRepository $userRepository): Response
     {
-        // En tu controlador o servicio
-
         $hasWon = $userRepository->hasUserWonAnySorteo($user);
         //  dd($hasWon);
-        
-
         return $this->render('user/show.html.twig', [
             'user' => $user,
             'hasWon' => $hasWon,
@@ -103,10 +99,4 @@ class UserController extends AbstractController
    
         return $this->redirectToRoute('app_user_show', ['id' => $user->getId()]);
     }
-
-
-    
-
-
-
 }
